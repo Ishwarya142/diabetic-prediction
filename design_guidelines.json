@@ -1,0 +1,96 @@
+{
+  "theme": "light",
+  "archetype": "1 (Organic & Earthy)",
+  "rationale": "Medical/Clinical dashboard requiring extreme trust, clarity, and calm. Dark mode feels clinical/cold. Opted for an earthy, solid-surface approach to maximize data legibility and reduce visual fatigue.",
+  "colors": {
+    "background": "bg-stone-50",
+    "surface": "bg-white",
+    "surface_glass": "FORBIDDEN - use solid bg-white",
+    "border": "border-stone-200",
+    "text_primary": "text-stone-900",
+    "text_secondary": "text-stone-500",
+    "primary": "bg-sky-700 hover:bg-sky-800 text-white",
+    "accent_risk": "bg-orange-600 text-white",
+    "accent_healthy": "bg-lime-600 text-white",
+    "chart_risk": "#EA580C",
+    "chart_healthy": "#65A30D",
+    "chart_neutral": "#0EA5E9",
+    "disclaimer_bg": "bg-amber-50",
+    "disclaimer_border": "border-amber-200",
+    "disclaimer_text": "text-amber-900"
+  },
+  "typography": {
+    "heading_font": "Manrope",
+    "body_font": "IBM Plex Sans",
+    "h1": "text-3xl sm:text-4xl font-extrabold tracking-tight text-stone-900",
+    "h2": "text-2xl sm:text-3xl font-bold tracking-tight text-stone-900",
+    "h3": "text-lg sm:text-xl font-semibold tracking-tight text-stone-900",
+    "body": "text-base text-stone-700 leading-relaxed",
+    "label": "text-xs font-semibold tracking-[0.05em] uppercase text-stone-500",
+    "number_display": "text-4xl font-light tracking-tighter text-stone-900"
+  },
+  "layout_and_spacing": {
+    "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "section_spacing": "py-12 md:py-16",
+    "card_padding": "p-6 md:p-8",
+    "gap_tight": "gap-4 md:gap-6",
+    "gap_loose": "gap-8 md:gap-12",
+    "dashboard_grid": "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6",
+    "form_grid": "grid grid-cols-1 md:grid-cols-2 gap-6",
+    "border_radius": "rounded-lg"
+  },
+  "components": {
+    "card": "bg-white border border-stone-200 rounded-lg shadow-sm",
+    "input": "bg-white border border-stone-300 rounded-md px-4 py-2 text-stone-900 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-shadow",
+    "button_primary": "bg-sky-700 hover:bg-sky-800 text-white font-medium rounded-md px-6 py-2 transition-colors inline-flex items-center justify-center gap-2",
+    "button_secondary": "bg-white border border-stone-300 hover:bg-stone-50 text-stone-700 font-medium rounded-md px-6 py-2 transition-colors inline-flex items-center justify-center gap-2",
+    "badge_risk": "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800",
+    "badge_healthy": "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-lime-100 text-lime-800",
+    "sidebar": "w-64 bg-stone-900 text-stone-300 flex-shrink-0 min-h-screen",
+    "sidebar_link": "flex items-center gap-3 px-4 py-2 rounded-md hover:bg-stone-800 hover:text-white transition-colors",
+    "sidebar_link_active": "flex items-center gap-3 px-4 py-2 rounded-md bg-stone-800 text-white font-medium",
+    "table_header": "bg-stone-50 border-b border-stone-200 text-left text-xs font-semibold text-stone-500 uppercase tracking-wider px-6 py-3",
+    "table_cell": "px-6 py-4 whitespace-nowrap text-sm text-stone-900 border-b border-stone-100"
+  },
+  "icons": {
+    "library": "@phosphor-icons/react",
+    "weight": "duotone",
+    "size_default": "20",
+    "instructions": "Use Phosphor Icons in duotone weight for a highly professional and refined look. Add 'yarn add @phosphor-icons/react' to dependencies."
+  },
+  "animations": {
+    "hover_state": "transition-all duration-200 ease-in-out",
+    "page_transition": "animate-in fade-in slide-in-from-bottom-4 duration-500",
+    "chart_entrance": "Use Recharts default animations but ensure they have an ease-out curve."
+  },
+  "media": {
+    "logo_icon": "Use Phosphor 'Heartbeat' or 'Activity' icon for the main logo mark instead of a raster image to keep it crisp and scalable.",
+    "doctor_avatar_1": "https://images.unsplash.com/photo-1612531385446-f7e6d131e1d0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2ODl8MHwxfHNlYXJjaHwyfHxkb2N0b3IlMjBwb3J0cmFpdHxlbnwwfHx8fDE3NzcxMjMzMTR8MA&ixlib=rb-4.1.0&q=85",
+    "doctor_avatar_2": "https://images.unsplash.com/photo-1594824476967-48c8b964273f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2ODl8MHwxfHNlYXJjaHwxfHxkb2N0b3IlMjBwb3J0cmFpdHxlbnwwfHx8fDE3NzcxMjMzMTR8MA&ixlib=rb-4.1.0&q=85",
+    "auth_background": "https://images.pexels.com/photos/12660379/pexels-photo-12660379.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  },
+  "features": {
+    "shap_chart": {
+      "type": "Horizontal Bar Chart using Recharts",
+      "design": "Use Terracotta (#EA580C) for positive values (pushing towards diabetes) and Moss Green (#65A30D) for negative values. No grid lines except a strong center zero-line.",
+      "tooltip": "Custom tooltip with solid white bg and 1px border. Highlight exact SHAP value and feature name."
+    },
+    "probability_gauge": {
+      "type": "Radial Bar Chart or heavily styled Progress Bar",
+      "design": "If risk > 50%, color is Terracotta (#EA580C). If risk <= 50%, color is Moss Green (#65A30D). Large centered text showing the percentage."
+    },
+    "ai_explanation": {
+      "layout": "Card with pale amber background for the disclaimer banner at the top, followed by a clean, readable typographic layout for the Sonnet 4.5 text.",
+      "disclaimer_text": "This is an AI-generated explanation. This is not medical advice. Always consult a healthcare professional for diagnosis."
+    }
+  },
+  "instructions_to_main_agent": [
+    "Use pure HTML/Tailwind for structural page layouts. Use Shadcn components for forms, inputs, tables, dropdowns, and dialogs.",
+    "Do not use generic Inter font. Apply Manrope to headings and IBM Plex Sans to body text. Inject these via Google Fonts in index.html.",
+    "The dashboard layout must use 'CONTROL ROOM' grid pattern (tight gaps, high density, solid surfaces, no glassmorphism).",
+    "Ensure all cards have a 1px border of border-stone-200 and a subtle shadow-sm. No floating neon shadows.",
+    "Strictly adhere to the SHAP chart color scheme: Terracotta (#EA580C) for positive/danger contributions, Moss Green (#65A30D) for negative/safe contributions.",
+    "Forms must be modular: Group the 8 inputs logically into cards: Demographics (Age, BMI), Vitals (Blood Pressure, Skin Thickness), Lab Results (Pregnancies, Glucose, Insulin, Pedigree).",
+    "Include 'data-testid' attributes on all form inputs, buttons, and navigation links."
+  ]
+}
