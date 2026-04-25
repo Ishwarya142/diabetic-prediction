@@ -1,10 +1,8 @@
-"""Claude Sonnet 4.5 (via Emergent Universal Key) — natural-language reports."""
+"""LLM-backed natural-language reports with safe fallback."""
 import logging
 import os
 import uuid
 from typing import Dict, List
-
-from emergentintegrations.llm.chat import LlmChat, UserMessage
 
 log = logging.getLogger(__name__)
 
@@ -47,6 +45,7 @@ async def generate_report(
     )
 
     try:
+        from emergentintegrations.llm.chat import LlmChat, UserMessage
         chat = LlmChat(
             api_key=api_key,
             session_id=f"diab-{uuid.uuid4()}",
