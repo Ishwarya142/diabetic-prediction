@@ -1,0 +1,42 @@
+{
+  "summary": "End-to-end backend (real HTTP) + frontend Playwright testing of MedAI diabetes-risk app. 11/11 backend pytest tests pass against deployed REACT_APP_BACKEND_URL. Frontend login, dashboard, /predict (3 grouped cards), /result (probability gauge + SHAP chart + AI explanation + amber disclaimer + SHAP tooltip showing feature/value/SHAP), and sign-out all work. /history page renders 0 rows even though the API returns items (likely UI bug).",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "/api/predictions", "issue": "Returns wrapped {\"items\": [...]} object instead of plain list; mismatch with prompt spec but matches frontend consumer (History.jsx reads r.data.items)."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "History page", "issue": "After successful navigation to /history (networkidle wait), no [data-testid^='history-row-'] rows render even though /api/predictions returns >=2 items for the demo user (verified via backend test). Page appears mostly blank. Reproduced consistently. Likely cause: setItems(r.data.items) timing or response parsing issue, OR `loading` state never flips for the user, OR table tbody hidden by CSS until first render.", "selector": "[data-testid^='history-row-']", "priority": "HIGH"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Result page", "issues": ["AI explanation card initially shows only 'Generating explanation...' spinner; LLM response is fetched on /api/report but UI takes ~5s. Acceptable, but consider showing skeleton or progress text."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_http_api.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Investigate /history page rendering: confirm History.jsx correctly reads r.data.items and renders rows. The backend returns the items wrapper correctly (verified). Suspect a state/render issue on this page.",
+    "Optional: align /api/predictions response shape with the documented spec (plain list) OR update spec — currently it returns {\"items\": [...]}; frontend already expects items.",
+    "Login redirects to '/' (renders Dashboard) instead of '/dashboard'. Functionally fine; align URL if intended."
+  ],
+  "critical_code_review_comments": [
+    "test_api.py uses fastapi TestClient which conflicts with motor's event loop (known issue per review_request); replaced with real-HTTP pytest at test_http_api.py — keep both or remove the broken one.",
+    "/api/predictions response shape inconsistency between docs and implementation.",
+    "Result page LLM explanation has no error fallback if /api/report fails; consider error state."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_http_api.py (new - 11 real-HTTP pytest tests)"
+  ],
+  "success_rate": {"backend": "100% (11/11 pytest)", "frontend": "~85% (login, dashboard, predict, result, signout work; history rows do not render)"},
+  "test_credentials": "demo@medai.app / Demo1234! (auto-seeded; verified working)",
+  "seed_data_creation": "Created 1 TEST_<uuid>@medai.app user via /api/auth/register and 1 prediction via /api/predict during tests.",
+  "retest_needed": true,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend is solid (11/11). Focus next iteration on /history rendering bug. SHAP tooltip already verified to show feature/value/SHAP. AI explanation generation works end-to-end (verified via /api/report test which passed in ~6s).",
+  "rca of the issue": "History page bug: API GET /api/predictions returns 200 with body {\"items\": [...]} containing the user's predictions (verified by backend test). History.jsx does setItems(r.data.items) and maps over items rendering tr[data-testid='history-row-${id}']. During Playwright run after wait_for_url('**/history**') + networkidle + screenshot, locator count for history-row-* was 0. Need to add longer wait or inspect whether the setItems is invoked / loading flag flips. The screenshot also shows the entire page appears with low opacity/empty — possibly the AppShell main content area isn't showing the History component table. Suggest adding console.log in History.jsx useEffect, or checking for a JS error during navigation transition."
+}
