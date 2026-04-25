@@ -43,17 +43,8 @@ export default function AuthPage() {
           <h1 className="font-display text-4xl font-extrabold tracking-tight leading-tight">
             Explainable diabetes-risk screening for clinicians.
           </h1>
-          <p className="text-stone-400 text-base leading-relaxed">
-            Random Forest predictions with SHAP explanations and AI-generated
-            clinical summaries — never a diagnosis, always transparent.
-          </p>
-          <div className="flex gap-2 pt-4">
-            <span className="px-3 py-1 text-xs rounded-full bg-sky-900/40 border border-sky-800 text-sky-300">SHAP</span>
-            <span className="px-3 py-1 text-xs rounded-full bg-lime-900/30 border border-lime-800 text-lime-300">scikit-learn</span>
-            <span className="px-3 py-1 text-xs rounded-full bg-amber-900/30 border border-amber-800 text-amber-200">Claude Sonnet 4.5</span>
-          </div>
         </div>
-        <p className="text-stone-500 text-xs">Pima Indians dataset • Demo build • Not for clinical use.</p>
+        <div />
       </div>
 
       {/* Right form panel */}
@@ -65,7 +56,7 @@ export default function AuthPage() {
             </h2>
             <p className="text-sm text-stone-500 mt-2">
               {mode === "login"
-                ? "Demo login: demo@medai.app / Demo1234!"
+                ? "Welcome back. Enter your credentials to continue."
                 : "Get started in under a minute."}
             </p>
           </div>
